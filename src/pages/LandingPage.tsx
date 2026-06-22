@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Receipt, 
@@ -10,7 +10,11 @@ import {
   TrendingDown, 
   ShieldCheck, 
   FileCheck2,
-  BookOpen
+  BookOpen,
+  Calendar,
+  Clock,
+  User,
+  X
 } from 'lucide-react';
 
 export default function LandingPage() {
@@ -45,6 +49,105 @@ export default function LandingPage() {
     }
   ];
 
+  const [selectedPost, setSelectedPost] = useState<any | null>(null);
+
+  const blogPosts = [
+    {
+      id: 'vat-guide-oman',
+      title: "Understanding Oman's 5% VAT: A Comprehensive Guide for Businesses",
+      excerpt: "Learn how the standard Value Added Tax (VAT) rate applies to Omani corporations, thresholds for mandatory registration, and VAT-exempt categories under the Tax Authority guidelines.",
+      content: `
+        <p class="mb-4 text-slate-600 leading-relaxed">The Sultanate of Oman introduced Value Added Tax (VAT) at a standard rate of 5% in April 2021 under Royal Decree No. 121/2020. It applies to most supplies of goods and services within the Sultanate, as well as imports into Oman.</p>
+
+        <h3 class="text-slate-900 font-bold text-base mt-6 mb-2">Who Must Register for VAT in Oman?</h3>
+        <p class="mb-4 text-slate-600 leading-relaxed">Businesses operating in Oman are required to register for VAT depending on their annual taxable turnover:</p>
+        <ul class="list-disc pl-5 mb-4 space-y-1.5 text-slate-650 text-sm">
+          <li><strong>Mandatory Registration Threshold:</strong> If annual supplies/turnover exceeds <strong>OMR 38,500</strong>.</li>
+          <li><strong>Voluntary Registration Threshold:</strong> If annual supplies or expenses exceed <strong>OMR 19,250</strong>.</li>
+        </ul>
+
+        <h3 class="text-slate-900 font-bold text-base mt-6 mb-2">Bilingual Tax Invoice Requirements</h3>
+        <p class="mb-4 text-slate-600 leading-relaxed">Under the Oman Tax Authority (OTA) regulations, tax invoices must display billing descriptions and headers in both <strong>Arabic and English</strong>. It should also include:</p>
+        <ul class="list-disc pl-5 mb-4 space-y-1.5 text-slate-650 text-sm">
+          <li>The term "Tax Invoice" clearly visible in both languages.</li>
+          <li>The business's Tax Identification Number (TIN).</li>
+          <li>A sequential invoice identifier code.</li>
+          <li>Date of supply and date of issue.</li>
+          <li>Bilingual items breakdown, VAT rate, and total tax charged.</li>
+        </ul>
+
+        <h3 class="text-slate-900 font-bold text-base mt-6 mb-2">VAT Exemptions in Oman</h3>
+        <p class="mb-4 text-slate-600 leading-relaxed">Certain essential items and services are either zero-rated or exempt from VAT altogether, including:</p>
+        <ul class="list-disc pl-5 mb-4 space-y-1.5 text-slate-650 text-sm">
+          <li>Basic food items (around 488 listed items, such as milk, fresh bread, vegetables).</li>
+          <li>Healthcare services and associated medical goods.</li>
+          <li>Educational services.</li>
+          <li>Financial services and public transport.</li>
+        </ul>
+      `,
+      tag: 'Taxation & VAT',
+      date: 'June 20, 2026',
+      readTime: '5 min read',
+      author: 'Oman Finance Advisory Team'
+    },
+    {
+      id: 'pasi-pension-calculations',
+      title: "Social Insurance and pension breakdowns for Employees in Oman",
+      excerpt: "A guide to understanding how PASI (Public Authority for Social Insurance) is deducted from basic salary and allowances for Omani nationals versus expat staff.",
+      content: `
+        <p class="mb-4 text-slate-600 leading-relaxed">The Public Authority for Social Insurance (PASI) manages retirement benefits and social safety nets for Omani nationals in the private sector. It is a mandatory contribution system based on basic wages and recurring allowances.</p>
+
+        <h3 class="text-slate-900 font-bold text-base mt-6 mb-2">Deduction Breakdown</h3>
+        <p class="mb-4 text-slate-600 leading-relaxed">For Omani nationals, pension contributions are shared between the employee, the employer, and govt-sponsored policies:</p>
+        <ul class="list-disc pl-5 mb-4 space-y-1.5 text-slate-650 text-sm">
+          <li><strong>Employee Contribution:</strong> 7% of the total monthly basic salary + stable allowances. This is automatically deducted from the monthly payroll.</li>
+          <li><strong>Employer Contribution:</strong> 11.5% - 12.5% depending on system guidelines.</li>
+          <li><strong>Government Contribution:</strong> 1% paid by the state to support pension reserves.</li>
+        </ul>
+
+        <h3 class="text-slate-900 font-bold text-base mt-6 mb-2">Expat Employees & End of Service Gratuity</h3>
+        <p class="mb-4 text-slate-600 leading-relaxed">Foreign or expatriate workers in Oman do not participate in PASI pension. Pension is strictly for Omani nationals. Instead, expatriates are entitled to an <strong>End of Service Gratuity</strong> paid directly by the employer upon completion of their contract.</p>
+
+        <h3 class="text-slate-900 font-bold text-base mt-6 mb-2">Allowances and Contribution Caps</h3>
+        <p class="mb-4 text-slate-600 leading-relaxed">Only regular, recurring allowances (such as permanent housing and transport allowances) are included alongside the basic wage when calculating PASI contributions. Overtime, travel perks, and one-off bonuses are excluded from PASI calculations.</p>
+      `,
+      tag: 'Payroll & Pension',
+      date: 'May 14, 2026',
+      readTime: '4 min read',
+      author: 'HR Consulting Group Muscat'
+    },
+    {
+      id: 'gratuity-calculation-guide',
+      title: "Omani Labour Law: How to accurately compute End of Service Gratuity",
+      excerpt: "Step-by-step methodology under Oman's Royal Decrees to compute expatriate gratuity packages based on the latest basic pay increments.",
+      content: `
+        <p class="mb-4 text-slate-600 leading-relaxed">Under the latest Sultanate Labour Law, non-Omani workers who do not receive monthly social insurance (PASI) pension contributions are eligible for end of service benefits (gratuity) at the end of their professional contracts.</p>
+
+        <h3 class="text-slate-900 font-bold text-base mt-6 mb-2">The Two-Tier Calculation Formula</h3>
+        <p class="mb-4 text-slate-600 leading-relaxed">The compensation depends on the total years of continuous service completed with the employer:</p>
+        <ul class="list-disc pl-5 mb-4 space-y-1.5 text-slate-650 text-sm">
+          <li><strong>First 3 Years:</strong> Eligible for <strong>15 days of basic pay</strong> for each year of service.</li>
+          <li><strong>4th Year and Beyond:</strong> Eligible for <strong>30 days of basic pay</strong> for each year of service.</li>
+        </ul>
+
+        <h3 class="text-slate-900 font-bold text-base mt-6 mb-2">Practical Example</h3>
+        <p class="mb-4 text-slate-600 leading-relaxed">Let's calculate the package for an expatriate who worked for <strong>5 years</strong> with a final basic salary of <strong>OMR 800</strong> (excluding housing and utilities allowances):</p>
+        <ol class="list-decimal pl-5 mb-4 space-y-1.5 text-slate-650 text-sm">
+          <li><strong>First 3 Years:</strong> Calculation is (15 days / 30) * 800 * 3 = <strong>OMR 1200</strong>.</li>
+          <li><strong>Remaining 2 Years:</strong> Calculation is (30 days / 30) * 800 * 2 = <strong>OMR 1600</strong>.</li>
+          <li><strong>Grand Total Gratuity Benefit:</strong> OMR 1200 + OMR 1600 = <strong>OMR 2800</strong>.</li>
+        </ol>
+
+        <h3 class="text-slate-900 font-bold text-base mt-6 mb-2">Pro-Rata Calculations</h3>
+        <p class="mb-4 text-slate-600 leading-relaxed">If an employee works for partial or fractioned years (e.g., 2 years and 6 months), the gratuity must be calculated pro-rata. The system divides the basic salary down to active calendar days to prevent any calculation discrepancies.</p>
+      `,
+      tag: 'Labour Law',
+      date: 'May 02, 2026',
+      readTime: '6 min read',
+      author: 'Oman Legal Partners'
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans">
       {/* Navigation Topbar */}
@@ -74,7 +177,7 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 md:pt-40 md:pb-28 bg-linear-to-b from-blue-50/40 via-white to-slate-50 relative overflow-hidden">
         {/* Decorative Grid Patterns */}
-        <div className="absolute inset-0 z-0 opacity-40pointer-events-none bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]"></div>
+        <div className="absolute inset-0 z-0 opacity-40 pointer-events-none bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]"></div>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200/50 text-xs font-semibold mb-6">
@@ -151,47 +254,116 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Mini How-To/Guide Section */}
-      <section className="py-20 bg-slate-50 border-t border-b border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-slate-900 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-2xl">
-            {/* Background elements */}
-            <div className="absolute right-0 bottom-0 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl"></div>
-            
-            <div className="relative z-10 max-w-2xl">
-              <span className="text-emerald-400 text-xs font-bold tracking-widest uppercase">Quick Deployment</span>
-              <h3 className="font-space text-2xl sm:text-3xl font-bold mt-3 text-white tracking-tight">How to connect Supabase in 2 minutes</h3>
-              <p className="mt-4 text-slate-300 text-sm leading-relaxed">
-                Want persistent cloud records, real user sign-ups, and live invoices?
-                Open the <strong>Secrets</strong> panel inside your AI Studio Workspace and paste your Supabase Credentials:
+      {/* Interactive Blog HTML / Knowledge Hub section */}
+      <section id="blog-section" className="py-20 bg-slate-50 border-t border-b border-slate-250">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+              <span className="text-xs font-bold text-blue-600 tracking-widest uppercase flex items-center gap-1.5 mb-2">
+                <BookOpen className="w-4 h-4 shrink-0" />
+                Sultanate Finance Learning Hub
+              </span>
+              <h3 className="font-space text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                Latest Financial & Corporate Advice 🇴🇲
+              </h3>
+              <p className="text-slate-505 text-sm mt-2 max-w-xl">
+                Read deep-dives on regulations, corporate taxes, and retirement benefit schemas provided directly by our consulting partners.
               </p>
-              
-              <div className="mt-6 bg-slate-950 font-mono text-xs text-slate-300 p-4 rounded-xl border border-slate-800 space-y-2">
-                <div><span className="text-blue-400"># Set these in your Secrets tab:</span></div>
-                <div><span className="text-emerald-400">VITE_SUPABASE_URL</span>="https://your-project.supabase.co"</div>
-                <div><span className="text-emerald-400">VITE_SUPABASE_ANON_KEY</span>="your-anon-key..."</div>
-              </div>
-
-              <div className="mt-8 flex gap-4">
-                <Link 
-                  to="/login" 
-                  className="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-5 py-3 rounded-xl shadow-md transition-all"
-                >
-                  Enter Sandbox
-                </Link>
-                <a 
-                  href="https://supabase.com" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="bg-slate-800 hover:bg-slate-700 text-white text-xs sm:text-sm font-semibold px-5 py-3 rounded-xl border border-slate-700 transition-all flex items-center gap-1.5"
-                >
-                  Create Supabase DB
-                </a>
-              </div>
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {blogPosts.map((post) => (
+              <div 
+                key={post.id}
+                onClick={() => setSelectedPost(post)}
+                className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden cursor-pointer hover:-translate-y-1 hover:shadow-xl hover:border-blue-500/20 transition-all duration-300 flex flex-col group"
+                id={`blog-card-${post.id}`}
+              >
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="bg-blue-50 text-blue-700 text-[10px] font-bold px-2.5 py-1 rounded-md border border-blue-100">
+                      {post.tag}
+                    </span>
+                    <span className="text-slate-400 text-[11px] flex items-center gap-1 font-medium">
+                      <Clock className="w-3.5 h-3.5" />
+                      {post.readTime}
+                    </span>
+                  </div>
+                  
+                  <h4 className="font-space font-bold text-base text-slate-900 group-hover:text-blue-600 leading-snug transition-colors mb-2">
+                    {post.title}
+                  </h4>
+                  
+                  <p className="text-xs text-slate-500 leading-relaxed font-medium mb-6 flex-1 line-clamp-3">
+                    {post.excerpt}
+                  </p>
+
+                  <div className="border-t border-slate-100 pt-4 mt-auto flex items-center justify-between text-xs text-slate-500 font-medium">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {post.date}
+                    </span>
+                    <span className="text-blue-600 font-bold group-hover:underline flex items-center gap-0.5">
+                      Read Article &rarr;
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* Interactive Blog Reader Modal */}
+      {selectedPost && (
+        <div className="fixed inset-0 z-100 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-fade-in" id="blog-modal">
+          <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden border border-slate-200 max-h-[85vh] flex flex-col animate-scale-up">
+            {/* Modal Header */}
+            <div className="p-6 border-b border-slate-150 flex items-start justify-between gap-4 bg-slate-50">
+              <div>
+                <span className="bg-blue-100 text-blue-800 text-[10px] font-bold px-2.5 py-1 rounded-md border border-blue-200 uppercase tracking-wider block w-max mb-2">
+                  {selectedPost.tag}
+                </span>
+                <h4 className="font-space font-extrabold text-xl text-slate-900 leading-snug">
+                  {selectedPost.title}
+                </h4>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-slate-500 mt-2 font-medium">
+                  <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-slate-400" /> {selectedPost.date}</span>
+                  <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-slate-400" /> {selectedPost.readTime}</span>
+                  <span className="flex items-center gap-1.5"><User className="w-4 h-4 text-slate-400" /> {selectedPost.author}</span>
+                </div>
+              </div>
+              <button 
+                onClick={() => setSelectedPost(null)}
+                className="text-slate-400 hover:text-slate-705 p-1 px-2.5 py-2.5 bg-white border border-slate-200 hover:border-slate-300 rounded-xl transition-all"
+                id="close-blog-modal"
+                title="Close article"
+              >
+                <X className="w-4.5 h-4.5" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8 overflow-y-auto text-sm text-slate-700 leading-relaxed font-normal space-y-4">
+              <div 
+                className="prose max-w-none text-slate-600 text-[13px] leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: selectedPost.content }}
+              />
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 bg-slate-50 border-t border-slate-150 flex justify-end gap-3 font-medium text-xs">
+              <button
+                onClick={() => setSelectedPost(null)}
+                className="bg-slate-900 text-white font-semibold hover:bg-slate-800 px-5 py-2.5 rounded-xl text-center self-end transition-all shadow-sm"
+              >
+                Close Reader
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 mt-auto">

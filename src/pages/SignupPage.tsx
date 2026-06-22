@@ -7,11 +7,10 @@ export default function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [pin, setPin] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const isConfigured = dataService.isConfigured();
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,10 +26,15 @@ export default function SignupPage() {
       return;
     }
 
+    if (pin.length !== 4) {
+      setError('Security PIN must be exactly 4 digits.');
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const { user, error: authError } = await dataService.signUp(email, password);
+      const { user, error: authError } = await dataService.signUp(email, password, pin);
       if (authError) {
         setError(authError.message);
       } else if (user) {
@@ -53,7 +57,7 @@ export default function SignupPage() {
         </div>
         <h2 className="font-space text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-none">Create Your Account</h2>
         <p className="mt-2 text-xs sm:text-sm text-slate-500">
-          Oman Rent-free, Setup in Muscat/GCC compliant dashboards
+          Muscat/GCC compliant offline financial dashboard
         </p>
       </div>
 
@@ -68,14 +72,11 @@ export default function SignupPage() {
               </div>
             )}
 
-            {!isConfigured && (
-              <div className="bg-amber-50 border border-amber-200 text-amber-900 p-3.5 rounded-xl text-xs flex items-start gap-2">
-                <AlertTriangle className="w-4.5 h-4.5 text-amber-500 shrink-0" />
-                <span>
-                  <strong>Sandbox Mode active:</strong> Signing up here creates a private locale session inside your browser's local state. No cloud servers are contacted.
-                </span>
-              </div>
-            )}
+            <div className="bg-emerald-50 border border-emerald-150 text-emerald-800 p-3.5 rounded-xl text-xs flex items-start gap-2">
+              <span className="leading-relaxed">
+                🔒 <strong>100% Offline Security model:</strong> Your account profile, calculations, and generated invoices remain fully private. No cloud databases are ever used.
+              </span>
+            </div>
 
             <div>
               <label htmlFor="email" className="block text-xs font-semibold text-slate-600 uppercase tracking-wide">
@@ -100,7 +101,7 @@ export default function SignupPage() {
 
             <div>
               <label htmlFor="password" className="block text-xs font-semibold text-slate-600 uppercase tracking-wide">
-                Password
+                Account Password
               </label>
               <div className="mt-1.5 relative rounded-lg">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
@@ -136,6 +137,32 @@ export default function SignupPage() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="confirm password"
                   className="block w-full pl-10 pr-3 py-2.5 bg-slate-50/50 border border-slate-200 rounded-xl text-sm placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900"
+                />
+              </div>
+            </div>
+
+            <div className="border-t border-slate-100 pt-4.5">
+              <label htmlFor="signup-pin" className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                Create 4-Digit Security PIN
+              </label>
+              <p className="text-[11px] text-slate-400 mb-2 font-medium">Use this PIN to login is extremely easy and secure to remember.</p>
+              
+              <div className="relative rounded-lg w-32">
+                <input
+                  id="signup-pin"
+                  name="pin"
+                  type="password"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={4}
+                  required
+                  value={pin}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/[^0-9]/g, '');
+                    setPin(val);
+                  }}
+                  placeholder="••••"
+                  className="block w-full text-center text-lg tracking-[0.5em] font-extrabold py-2 bg-slate-50/50 border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 rounded-xl outline-hidden transition-all text-slate-900"
                 />
               </div>
             </div>
