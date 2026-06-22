@@ -151,47 +151,16 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Mini How-To/Guide Section */}
-      <section className="py-20 bg-slate-50 border-t border-b border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-slate-900 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-2xl">
-            {/* Background elements */}
-            <div className="absolute right-0 bottom-0 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl"></div>
-            
-            <div className="relative z-10 max-w-2xl">
-              <span className="text-emerald-400 text-xs font-bold tracking-widest uppercase">Quick Deployment</span>
-              <h3 className="font-space text-2xl sm:text-3xl font-bold mt-3 text-white tracking-tight">How to connect Supabase in 2 minutes</h3>
-              <p className="mt-4 text-slate-300 text-sm leading-relaxed">
-                Want persistent cloud records, real user sign-ups, and live invoices?
-                Open the <strong>Secrets</strong> panel inside your AI Studio Workspace and paste your Supabase Credentials:
-              </p>
-              
-              <div className="mt-6 bg-slate-950 font-mono text-xs text-slate-300 p-4 rounded-xl border border-slate-800 space-y-2">
-                <div><span className="text-blue-400"># Set these in your Secrets tab:</span></div>
-                <div><span className="text-emerald-400">VITE_SUPABASE_URL</span>="https://your-project.supabase.co"</div>
-                <div><span className="text-emerald-400">VITE_SUPABASE_ANON_KEY</span>="your-anon-key..."</div>
-              </div>
-
-              <div className="mt-8 flex gap-4">
-                <Link 
-                  to="/login" 
-                  className="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-5 py-3 rounded-xl shadow-md transition-all"
-                >
-                  Enter Sandbox
-                </Link>
-                <a 
-                  href="https://supabase.com" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="bg-slate-800 hover:bg-slate-700 text-white text-xs sm:text-sm font-semibold px-5 py-3 rounded-xl border border-slate-700 transition-all flex items-center gap-1.5"
-                >
-                  Create Supabase DB
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <section className="py-20 bg-slate-50 border-t border-b border-slate-200">
+  <div className="max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+    <h3 className="text-2xl font-bold text-slate-900">
+      Built for Businesses in Oman
+    </h3>
+    <p className="mt-4 text-slate-600">
+      A fast, accurate finance toolkit for VAT, payroll, invoices, and compliance.
+    </p>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 mt-auto">
