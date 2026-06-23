@@ -4,25 +4,13 @@ import {
   LayoutDashboard, 
   Receipt, 
   Coins, 
-  TrendingUp, 
   Award, 
   FileText, 
   LogOut, 
   Menu, 
   X, 
   User,
-  AlertCircle,
-  Database,
-  Github,
-  Download,
-  Globe,
-  ChevronDown,
-  ChevronUp,
-  Copy,
-  Check,
-  ExternalLink,
-  Settings,
-  Server
+  AlertCircle
 } from 'lucide-react';
 import { dataService } from '../lib/dataService';
 import { UserProfile } from '../types';
@@ -35,18 +23,7 @@ export default function DashboardLayout() {
   const navigate = useNavigate();
   const isConfigured = dataService.isConfigured();
 
- const [showDeploymentPanel, setShowDeploymentPanel] = useState(false);
-  const [activeTab, setActiveTab] = useState<'download' | 'github' | 'domain' | 'cloudflare'>('download');
-  const [copiedText, setCopiedText] = useState<'git' | 'vercel' | 'dns' | 'cf' | null>(null);
-
-  const handleCopyText = (text: string, key: 'git' | 'vercel' | 'dns' | 'cf') => {
-    navigator.clipboard.writeText(text);
-    setCopiedText(key);
-    setTimeout(() => setCopiedText(null), 2000);
-  };
-
   useEffect(() => {
-    // Sync authenticated user status
     const unsubscribe = dataService.onAuthStateChange((currentUser) => {
       setUser(currentUser);
       setLoading(false);
@@ -54,7 +31,6 @@ export default function DashboardLayout() {
         navigate('/login');
       }
     });
-
     return () => unsubscribe();
   }, [navigate]);
 
@@ -155,7 +131,7 @@ export default function DashboardLayout() {
         </div>
       </aside>
 
-      {/* Mobile Sidebar overlay */}
+      {/* Mobile Sidebar Overlay */}
       {mobileOpen && (
         <div className="no-print fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-xs md:hidden" onClick={() => setMobileOpen(false)}>
           <aside className="w-64 max-w-[80vw] h-full bg-slate-900 text-white flex flex-col p-5" onClick={(e) => e.stopPropagation()}>
@@ -213,7 +189,7 @@ export default function DashboardLayout() {
 
       {/* Main Content Pane */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Header - Desktop & Mobile */}
+        {/* Header */}
         <header className={`no-print bg-white border-b border-slate-200/80 px-4 md:px-8 py-4 flex items-center justify-between shrink-0 sticky top-0 z-30 transition-all ${(!isConfigured && window.innerWidth >= 768) ? 'mt-8' : ''}`}>
           <div className="flex items-center gap-3">
             <button
@@ -228,7 +204,6 @@ export default function DashboardLayout() {
               </h2>
               <p className="text-xs text-slate-500">Calculators and finance tools specialized for Oman businesses</p>
             </div>
-            {/* Minimal Mobile Header Logo */}
             <div className="flex items-center gap-2 md:hidden">
               <span className="text-xl">🇴🇲</span>
               <span className="font-space font-bold text-slate-900">Oman Finance</span>
@@ -248,9 +223,9 @@ export default function DashboardLayout() {
           </div>
         </header>
 
-        {/* Content Outlet */}
+        {/* Page Content */}
         <main className="flex-1 overflow-y-auto p-4 md:p-8">
-     
+          <Outlet />
         </main>
       </div>
     </div>
