@@ -175,8 +175,7 @@ export default function LandingPage() {
   <Link to="/about" className="text-xs text-slate-400 hover:text-white transition-all">About Us</Link>
   <Link to="/privacy" className="text-xs text-slate-400 hover:text-white transition-all">Privacy Policy</Link>
   <Link to="/contact" className="text-xs text-slate-400 hover:text-white transition-all">Contact Us</Link>
-</div>
-          
+</div> 
           <div className="pt-4 border-t border-slate-800 text-xs text-slate-600">
             © {new Date().getFullYear()} Oman Finance Toolkit. All rights reserved. Made in GCC.
           </div>
