@@ -9,6 +9,9 @@ import VatPage from './pages/VatPage';
 import SalaryPage from './pages/SalaryPage';
 import EndOfServicePage from './pages/EndOfServicePage';
 import InvoicePage from './pages/InvoicePage';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import AboutUs from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
 
 export default function App() {
   return (
@@ -20,6 +23,11 @@ export default function App() {
         {/* Public authentication screens */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+
+        {/* Info pages */}
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/contact" element={<ContactUs />} />
 
         {/* Protected Dashboard core layouts */}
         <Route element={<DashboardLayout />}>

@@ -171,7 +171,12 @@ export default function LandingPage() {
           </div>
           <p className="max-w-md mx-auto text-xs text-slate-500">
             A secure finance management suite compliant with Sultanate tax regulations and corporate guidelines.
-          </p>
+          </p><div className="flex items-center justify-center gap-6 mt-4">
+  <Link to="/about" className="text-xs text-slate-400 hover:text-white transition-all">About Us</Link>
+  <Link to="/privacy" className="text-xs text-slate-400 hover:text-white transition-all">Privacy Policy</Link>
+  <Link to="/contact" className="text-xs text-slate-400 hover:text-white transition-all">Contact Us</Link>
+</div>
+          
           <div className="pt-4 border-t border-slate-800 text-xs text-slate-600">
             © {new Date().getFullYear()} Oman Finance Toolkit. All rights reserved. Made in GCC.
           </div>
